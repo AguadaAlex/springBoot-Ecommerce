@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,11 +11,14 @@ import java.util.Date;
 @Entity
 @Table(name="product")
 @Data
-public class Producto {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private ProductCategory category;
     @Column(name = "sku")
     private String sku;
     @Column(name = "name")
